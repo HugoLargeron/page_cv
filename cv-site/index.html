@@ -135,8 +135,11 @@ a{color:inherit;}
   background:linear-gradient(90deg,transparent,#5c430f,transparent);
 }
 .pla-sub{
-  margin:0 auto;max-width:640px;font-size:.95rem;font-style:italic;color:#46330c;
+  margin:0 auto;max-width:720px;font-size:clamp(1.02rem,1.7vw,1.18rem);font-style:italic;
+  color:#2c1e08;line-height:1.55;
 }
+.pla-sub p{margin:9px 0 0;}
+.pla-sub p:first-child{margin-top:0;}
 
 /* ================= ÉTAGÈRE & LIVRES ================= */
 .library{
@@ -153,8 +156,8 @@ a{color:inherit;}
 }
 .book{
   appearance:none;border:0;cursor:pointer;position:relative;
-  width:30px;height:150px;--leath:#5b3a2b;--leath-hi:#7a5138;
-  padding:10px 0 8px;border-radius:3px 2px 2px 3px;
+  width:48px;height:235px;--leath:#5b3a2b;--leath-hi:#7a5138;
+  padding:11px 0 9px;border-radius:3px 2px 2px 3px;
   font-family:var(--serif);
   background:
     linear-gradient(90deg,#0d0703,transparent 14%,transparent 86%,#0d0703),
@@ -172,13 +175,13 @@ a{color:inherit;}
   background:linear-gradient(180deg,#2a1b08,#130b03);
   box-shadow:0 2px 3px rgba(0,0,0,.5);
 }
-.b1{--leath:#2f4659;--leath-hi:#476a82;height:158px;width:30px;}
-.b2{--leath:#4a1f23;--leath-hi:#6e3338;height:146px;width:34px;}
-.b3{--leath:#2f4a2f;--leath-hi:#486b45;height:160px;width:27px;}
-.b4{--leath:#5c2118;--leath-hi:#80301f;height:138px;width:32px;}
-.b5{--leath:#4a4a22;--leath-hi:#67672f;height:116px;width:23px;}
-.b6{--leath:#4a3320;--leath-hi:#6b4c2e;height:128px;width:30px;}
-.b7{--leath:#3d2342;--leath-hi:#5c365f;height:152px;width:26px;}
+.b1{--leath:#2f4659;--leath-hi:#476a82;height:252px;width:48px;}
+.b2{--leath:#4a1f23;--leath-hi:#6e3338;height:228px;width:53px;}
+.b3{--leath:#2f4a2f;--leath-hi:#486b45;height:258px;width:43px;}
+.b4{--leath:#5c2118;--leath-hi:#80301f;height:216px;width:51px;}
+.b5{--leath:#4a4a22;--leath-hi:#67672f;height:180px;width:35px;}
+.b6{--leath:#4a3320;--leath-hi:#6b4c2e;height:198px;width:47px;}
+.b7{--leath:#3d2342;--leath-hi:#5c365f;height:238px;width:41px;}
 .bspine{
   display:flex;flex-direction:column;align-items:center;justify-content:space-between;
   height:100%;width:100%;
@@ -190,7 +193,7 @@ a{color:inherit;}
 }
 .btitle{
   writing-mode:vertical-rl;text-orientation:mixed;
-  font-family:var(--serif);font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;
+  font-family:var(--serif);font-size:.82rem;letter-spacing:.16em;text-transform:uppercase;
   color:var(--gold-2);text-shadow:0 0 6px rgba(236,206,108,.55),0 0 14px rgba(236,206,108,.3);
 }
 .book:hover,.book:focus-visible{
@@ -428,9 +431,9 @@ a{color:inherit;}
   .pla-kicker{letter-spacing:.18em;font-size:.6rem;}
   .pla-sub{font-size:.86rem;}
   .library{padding:26px 6px 14px;}
-  .books-row{gap:8px;padding:0 10px;}
-  .bookend{margin:0 -16px 0 0;}
-  .bookend:last-of-type{margin:0 0 0 -16px;}
+  .books-row{gap:12px;padding:0 10px;}
+  .bookend{margin:0 -14px 0 0;}
+  .bookend:last-of-type{margin:0 0 0 -14px;}
   .sconce{width:110px;height:110px;top:40px;}
   .lib-foot{font-size:.58rem;}
   .openbook{width:98vw;}
@@ -438,6 +441,16 @@ a{color:inherit;}
   .leaf-l{left:11px;}
   .leaf-r{right:11px;padding:20px 16px 16px;}
   .viewer-close{right:2px;}
+  .book{width:36px;height:175px;padding:8px 0 6px;}
+  .bookend{width:14px;}
+  .b1{height:186px;width:36px;}
+  .b2{height:168px;width:40px;}
+  .b3{height:190px;width:32px;}
+  .b4{height:160px;width:38px;}
+  .b5{height:133px;width:26px;}
+  .b6{height:146px;width:35px;}
+  .b7{height:175px;width:30px;}
+  .btitle{font-size:.66rem;}
 }
 
 /* ================= IMPRESSION ================= */
@@ -486,7 +499,11 @@ html.no-js .viewer{display:none;}
       <p class="pla-kicker">Curriculum Vitae · 2026</p>
       <h1 class="pla-title">Hugo Largeron</h1>
       <div class="pla-rule" aria-hidden="true"></div>
-      <p class="pla-sub">Ancien militaire et coach sportif de 26 ans, en reconversion vers l'informatique — étudiant BTS SIO SISR à Saint-Étienne. Choisissez un ouvrage pour découvrir mon parcours, mes compétences et mes contacts.</p>
+      <div class="pla-sub">
+        <p>Ancien militaire et coach sportif de 26 ans, en reconversion vers l'informatique.</p>
+        <p>Étudiant BTS SIO SISR à Saint-Étienne.</p>
+        <p>Cliquez sur un ouvrage pour découvrir mon parcours, mes compétences et mes contacts.</p>
+      </div>
     </div>
   </header>
 
