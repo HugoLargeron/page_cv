@@ -1,940 +1,860 @@
 <!DOCTYPE html>
-<html lang="fr" class="no-js">
+<html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="CV sous forme de livre de Hugo Largeron — Étudiant BTS SIO SISR, ancien militaire et coach sportif, en reconversion vers l'informatique et la cybersécurité.">
-<meta name="theme-color" content="#22303c">
-<title>Hugo Largeron — Livre CV</title>
-<script>document.documentElement.classList.replace('no-js','js');</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hugo Largeron — CV à la bibliothèque</title>
+<meta name="description" content="CV de Hugo Largeron, BTS SIO SISR, présenté comme une bibliothèque ancienne : chaque rubrique est un livre à ouvrir.">
 <style>
-/* ==========================================================================
-   LIVRE CV — Hugo Largeron
-   1 page = 1 rubrique, feuilletage d'un vrai livre
-   ========================================================================== */
-
 :root{
-  --paper:#faf5ea;
-  --paper-2:#efe6d2;
-  --ink:#322b22;
-  --ink-soft:#6b6155;
-  --line:#ddd2bd;
-  --navy:#22303c;
-  --navy-2:#2b3c4c;
-  --navy-3:#1a2530;
-  --gold:#b08335;
-  --gold-2:#e0c078;
-  --serif:Georgia,'Iowan Old Style','Times New Roman',serif;
-  --sans:system-ui,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;
-  --radius:16px;
+  --serif:Georgia,'Times New Roman',Times,serif;
+  --sans:'Segoe UI',system-ui,Arial,sans-serif;
+  --gold:#c9a227;
+  --gold-2:#ecce6c;
+  --gold-3:#f6e6b0;
+  --ink:#241a10;
+  --paper:#f4ead0;
+  --paper-2:#e8d9b4;
+  --line:rgba(120,84,44,.4);
+  --walnut-1:#3a2411;
 }
-
-*,*::before,*::after{box-sizing:border-box;}
+*{box-sizing:border-box;}
 html{scroll-behavior:smooth;}
 body{
-  margin:0;
-  font-family:var(--sans);
-  color:var(--ink);
+  margin:0;color:var(--gold-3);
+  font-family:var(--sans);line-height:1.6;
   background:
-    radial-gradient(1200px 600px at 50% -10%, #e8e2d4 0%, transparent 60%),
-    repeating-linear-gradient(45deg, #e6e0d1 0 2px, #e9e3d5 2px 4px),
-    #e6e0d1;
-  line-height:1.6;
+    radial-gradient(110% 90% at 50% 0%, #5a3c1f 0%, #2c1a0a 55%, #150b04 100%);
+  min-height:100vh;
 }
-body.js .leaf:not(.active){display:none;}
 a{color:inherit;}
-::selection{background:var(--gold-2);}
+::selection{background:#7a5a1e;color:#fff;}
+[hidden]{display:none!important;}
+:focus-visible{outline:3px solid var(--gold-2);outline-offset:2px;border-radius:4px;}
 
-/* --- Réduction de mouvement --- */
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto;}
   *,*::before,*::after{animation-duration:.001s!important;transition-duration:.001s!important;}
 }
 
-/* --- Liens d'évitement --- */
 .skip-link{
   position:absolute;left:12px;top:-60px;z-index:200;
-  background:var(--navy);color:#fff;padding:10px 16px;border-radius:8px;
+  background:var(--walnut-1);color:#fff;padding:10px 16px;border-radius:8px;
   font-weight:600;transition:top .2s;
 }
 .skip-link:focus{top:12px;color:#fff;}
-:focus-visible{outline:3px solid var(--gold);outline-offset:2px;border-radius:4px;}
+.sr-only{
+  position:absolute;width:1px;height:1px;padding:0;margin:-1px;
+  overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0;
+}
 
-/* ==========================================================================
-   SCÈNE & LIVRE
-   ========================================================================== */
-.stage{max-width:1020px;margin:0 auto;padding:38px 16px 70px;}
+/* ================= DÉCOR DE LA BIBLIOTHÈQUE ================= */
+.lib{
+  position:relative;min-height:100vh;overflow:hidden;
+  display:flex;flex-direction:column;
+}
+.wall{
+  position:absolute;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(60% 40% at 50% 10%, rgba(255,205,115,.13), transparent 70%),
+    repeating-linear-gradient(90deg, rgba(0,0,0,.18) 0 2px, transparent 2px 6px),
+    radial-gradient(120% 90% at 50% 0%, #5a3c1f 0%, #2c1a0a 55%, #150b04 100%);
+}
+.wall::after{
+  content:"";position:absolute;inset:0;
+  background:radial-gradient(90% 70% at 50% 38%, transparent 55%, rgba(8,4,1,.55) 100%);
+}
+.arch{
+  position:absolute;top:0;left:50%;transform:translateX(-50%);
+  width:74vw;max-width:800px;height:130px;
+  background:radial-gradient(60% 100% at 50% 0%, rgba(80,52,26,.6), transparent 72%);
+  border-radius:130px 130px 0 0;
+}
+.pillar{
+  position:absolute;top:0;bottom:0;width:9vw;min-width:70px;z-index:0;pointer-events:none;
+  background:linear-gradient(90deg,#140b05 0%,#33200f 28%,#4b3117 50%,#33200f 72%,#140b05 100%);
+}
+.pillar::before{
+  content:"";position:absolute;left:0;right:0;top:0;height:26px;
+  background:linear-gradient(90deg,#1d1209,#4a2f16 50%,#1d1209);
+  border-bottom:1px solid rgba(240,208,120,.25);
+}
+.pillar::after{
+  content:"";position:absolute;left:0;right:0;bottom:0;height:20px;
+  background:linear-gradient(90deg,#1d1209,#4a2f16 50%,#1d1209);
+}
+.pillar-l{left:0;}
+.pillar-r{right:0;}
+.sconce{
+  position:absolute;top:70px;width:180px;height:180px;border-radius:50%;z-index:0;pointer-events:none;
+  background:radial-gradient(circle, rgba(255,214,130,.5), rgba(255,214,130,.14) 46%, transparent 72%);
+}
+.sconce-l{left:6vw;}
+.sconce-r{right:6vw;}
+.mote{
+  position:absolute;width:3px;height:3px;border-radius:50%;z-index:1;pointer-events:none;
+  background:rgba(240,220,170,.55);opacity:.35;animation:mote 16s linear infinite;
+}
+@keyframes mote{
+  0%{transform:translateY(20px);opacity:0;}
+  12%{opacity:.45;}
+  88%{opacity:.35;}
+  100%{transform:translateY(-520px);opacity:0;}
+}
+
+/* ================= PLAQUE DORÉE ================= */
+.plaque-wrap{position:relative;z-index:3;display:flex;justify-content:center;padding:52px 18px 0;}
+.plaque{
+  position:relative;text-align:center;
+  padding:26px 40px 24px;border-radius:10px;
+  background:linear-gradient(180deg,#f6dc8e 0%, #d9b25a 30%, #c1932f 60%, #a67b22 100%);
+  border:1px solid #5d4412;
+  box-shadow:
+    inset 0 2px 4px rgba(255,255,255,.55),
+    inset 0 -10px 22px rgba(70,45,5,.5),
+    0 22px 44px -14px rgba(0,0,0,.75);
+  color:#2c1e08;text-shadow:0 1px 0 rgba(255,240,200,.55);
+}
+.plaque::before{
+  content:"";position:absolute;inset:8px;border-radius:6px;
+  border:1.5px solid rgba(70,45,5,.55);
+  box-shadow:0 0 0 1px rgba(255,240,200,.28), inset 0 0 12px rgba(70,45,5,.35);
+  pointer-events:none;
+}
+.pla-kicker{
+  margin:0 0 4px;font-size:.66rem;letter-spacing:.34em;text-transform:uppercase;
+  color:#5c430f;
+}
+.pla-title{
+  margin:0;font-family:var(--serif);
+  font-size:clamp(1.9rem,5vw,3.1rem);letter-spacing:.14em;font-weight:700;
+  text-transform:uppercase;color:#281b06;
+}
+.pla-rule{
+  width:140px;height:2px;margin:10px auto;border-radius:1px;
+  background:linear-gradient(90deg,transparent,#5c430f,transparent);
+}
+.pla-sub{
+  margin:0 auto;max-width:640px;font-size:.95rem;font-style:italic;color:#46330c;
+}
+
+/* ================= ÉTAGÈRE & LIVRES ================= */
+.library{
+  position:relative;z-index:2;flex:1;
+  display:flex;align-items:center;justify-content:center;
+  padding:34px 18px 20px;
+}
+.shelf-zone{
+  position:relative;width:min(1040px,100%);padding:0 8px;
+}
+.books-row{
+  display:flex;align-items:flex-end;justify-content:center;
+  gap:16px;padding:0 46px;margin-bottom:-7px;position:relative;z-index:2;
+}
 .book{
-  position:relative;max-width:960px;margin:0 auto;
-  background:var(--navy);border-radius:var(--radius);
-  box-shadow:0 30px 60px -20px rgba(20,27,36,.55),0 10px 25px -12px rgba(20,27,36,.5);
+  appearance:none;border:0;cursor:pointer;position:relative;
+  width:30px;height:150px;--leath:#5b3a2b;--leath-hi:#7a5138;
+  padding:10px 0 8px;border-radius:3px 2px 2px 3px;
+  font-family:var(--serif);
+  background:
+    linear-gradient(90deg,#0d0703,transparent 14%,transparent 86%,#0d0703),
+    linear-gradient(180deg, rgba(240,208,120,.22), transparent 16%, transparent 84%, rgba(0,0,0,.42)),
+    linear-gradient(90deg,#100903,var(--leath) 16%,var(--leath-hi) 50%,var(--leath) 84%,#100903);
+  box-shadow:
+    inset -5px 0 8px rgba(0,0,0,.5),
+    inset 3px 0 6px rgba(255,230,170,.12),
+    0 14px 22px -8px rgba(0,0,0,.65);
+  color:var(--gold-2);
+  transition:transform .25s ease,box-shadow .25s ease,filter .25s ease;
 }
 .book::before{
-  content:"";position:absolute;inset:14px;border-radius:10px;
-  border:1px solid rgba(224,192,120,.35);pointer-events:none;z-index:6;
+  content:"";position:absolute;left:6%;right:6%;top:5px;height:6px;border-radius:3px 3px 1px 1px;
+  background:linear-gradient(180deg,#2a1b08,#130b03);
+  box-shadow:0 2px 3px rgba(0,0,0,.5);
 }
-.book .book-body::after{
-  content:"";position:absolute;inset:0;border-radius:var(--radius);
-  box-shadow:inset 2px 0 0 rgba(255,255,255,.06),inset -1.5px 0 0 rgba(0,0,0,.35),
-    inset 0 1px 0 rgba(255,255,255,.08),0 0 0 1px rgba(0,0,0,.25);
-  pointer-events:none;z-index:5;
+.b1{--leath:#2f4659;--leath-hi:#476a82;height:158px;width:30px;}
+.b2{--leath:#4a1f23;--leath-hi:#6e3338;height:146px;width:34px;}
+.b3{--leath:#2f4a2f;--leath-hi:#486b45;height:160px;width:27px;}
+.b4{--leath:#5c2118;--leath-hi:#80301f;height:138px;width:32px;}
+.b5{--leath:#4a4a22;--leath-hi:#67672f;height:116px;width:23px;}
+.b6{--leath:#4a3320;--leath-hi:#6b4c2e;height:128px;width:30px;}
+.b7{--leath:#3d2342;--leath-hi:#5c365f;height:152px;width:26px;}
+.bspine{
+  display:flex;flex-direction:column;align-items:center;justify-content:space-between;
+  height:100%;width:100%;
 }
-
-/* --- Barre supérieure --- */
-.book-topbar{
-  display:flex;align-items:center;justify-content:space-between;gap:12px;
-  padding:16px 22px;color:var(--gold-2);border-bottom:1px solid rgba(224,192,120,.18);
-  font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;
+.band{
+  display:block;width:70%;height:3px;border-radius:1px;
+  background:linear-gradient(90deg,#8a5f18,#f0d078,#8a5f18);
+  box-shadow:0 0 5px rgba(240,208,120,.55);
 }
-.book-topbar .book-title{display:flex;align-items:center;gap:10px;font-weight:600;}
-.book-topbar .seal{
-  width:26px;height:26px;flex:none;border-radius:50%;
-  border:1.5px solid var(--gold-2);display:grid;place-items:center;
-  font-family:var(--serif);font-size:11px;color:var(--gold-2);
+.btitle{
+  writing-mode:vertical-rl;text-orientation:mixed;
+  font-family:var(--serif);font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--gold-2);text-shadow:0 0 6px rgba(236,206,108,.55),0 0 14px rgba(236,206,108,.3);
 }
-.icon-btn{
-  background:transparent;border:1px solid rgba(224,192,120,.4);color:var(--gold-2);
-  border-radius:8px;padding:6px 10px;cursor:pointer;font-size:.75rem;
-  font-family:var(--sans);letter-spacing:.06em;display:inline-flex;align-items:center;gap:6px;transition:.2s;
+.book:hover,.book:focus-visible{
+  transform:translateY(-7px);
+  box-shadow:
+    inset -5px 0 8px rgba(0,0,0,.5),
+    inset 3px 0 6px rgba(255,230,170,.14),
+    0 22px 30px -10px rgba(0,0,0,.7),
+    0 0 22px rgba(236,206,108,.35);
 }
-.icon-btn:hover,.icon-btn:focus-visible{background:rgba(224,192,120,.15);}
-
-/* --- Corps du livre --- */
-.book-body{
-  position:relative;
-  background:var(--paper);
-  color:var(--ink);
-  margin:0 10px;border-radius:10px 10px var(--radius) var(--radius);
-  overflow:hidden;perspective:1900px;
+.book:active{transform:translateY(-2px);}
+.book.lit{
+  transform:translateY(-8px);
+  box-shadow:
+    inset -5px 0 8px rgba(0,0,0,.5),
+    inset 3px 0 6px rgba(255,230,170,.16),
+    0 24px 34px -10px rgba(0,0,0,.72),
+    0 0 30px rgba(236,206,108,.55);
+  animation:bookGlow 3.2s ease-in-out infinite;
 }
-/* Tranche des pages déjà lues (pile à gauche) */
-.pile{
-  position:absolute;top:0;bottom:0;left:-1px;z-index:2;
-  background:repeating-linear-gradient(90deg,#ece1c8 0 1px,#dbcdaa 1px 2px,#ecE1c8 2px 3px);
-  border-right:1px solid rgba(90,74,50,.4);
-  box-shadow:3px 0 10px rgba(60,45,25,.2);
-  transition:width .5s ease;width:6px;
+@keyframes bookGlow{
+  0%,100%{filter:brightness(1);}
+  50%{filter:brightness(1.16);}
 }
-.leaf-stack{position:relative;transition:height .6s cubic-bezier(.4,0,.2,1);}
-
-/* ==========================================================================
-   LES PAGES (1 page = 1 rubrique)
-   ========================================================================== */
-.leaf{position:relative;transform-style:preserve-3d;}
-body.js .leaf.active{display:block;}
-
-.leaf .lf-front,.leaf .lf-back{backface-visibility:hidden;transform-style:preserve-3d;}
-.leaf .lf-back{
-  position:absolute;inset:0;transform:rotateY(180deg);z-index:1;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  gap:10px;text-align:center;
-  background:
-    radial-gradient(80% 60% at 50% 0%, rgba(176,131,53,.05), transparent 60%),
-    var(--paper-2);
-  color:var(--ink-soft);padding:30px;
+.bookend{
+  align-self:stretch;width:26px;margin:0 -40px 0 0;
 }
-.leaf .lf-back .vs-seal{
-  width:56px;height:56px;border-radius:50%;border:1.5px solid var(--gold);
-  display:grid;place-items:center;font-family:var(--serif);color:var(--gold);font-size:.95rem;
-}
-.leaf .lf-back .vs-label{font-family:var(--serif);font-size:.95rem;color:var(--ink);}
-.leaf .lf-back .vs-folio{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);}
-
-/* Page courante (front) */
-.lf-front{
-  position:relative;min-height:420px;padding:34px 46px 48px;
-  background:
-    radial-gradient(120% 60% at 88% -8%, rgba(176,131,53,.05), transparent 50%),
-    linear-gradient(90deg, rgba(90,74,50,.055) 0, rgba(90,74,50,.02) 5%, transparent 8%),
-    var(--paper);
-  box-shadow:inset 26px 0 30px -38px rgba(60,45,25,.4);
-}
-.lf-front::before{
-  content:"";position:absolute;left:0;top:0;bottom:0;width:1px;
-  background:linear-gradient(180deg,transparent,rgba(90,74,50,.25),transparent);
+.bookend:last-of-type{margin:0 0 0 -40px;}
+.bookend::before{
+  content:"";display:block;height:100%;
+  background:linear-gradient(90deg,#1d1209,#4a2f16 50%,#1d1209);
+  border-radius:3px;box-shadow:0 12px 20px -6px rgba(0,0,0,.5);
 }
 
-/* En-tête de page */
-.page-head{margin-bottom:26px;}
-.head-top{display:flex;justify-content:space-between;align-items:baseline;gap:14px;flex-wrap:wrap;}
-.rub-num{font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);font-weight:700;}
-.folio{
-  font-family:var(--serif);font-size:.82rem;color:var(--ink-soft);
-  background:var(--paper-2);border:1px solid var(--line);border-radius:20px;
-  padding:2px 12px;
+/* --- Le plateau de bois --- */
+.shelf-board{
+  position:relative;height:18px;border-radius:3px;
+  background:linear-gradient(180deg,#57391c,#2c1908 88%);
+  box-shadow:
+    0 16px 26px -4px rgba(0,0,0,.7),
+    inset 0 2px 3px rgba(255,210,140,.25),
+    inset 0 -3px 6px rgba(0,0,0,.4);
 }
-.page-head h2{font-family:var(--serif);font-size:clamp(1.55rem,3.4vw,2.05rem);margin:10px 0 0;line-height:1.15;}
-.head-rule{width:56px;height:3px;background:var(--gold);border-radius:2px;margin-top:12px;}
-.page-foot{
-  margin-top:36px;text-align:center;font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;
-  color:var(--ink-soft);opacity:.75;
+.shelf-board::after{
+  content:"";position:absolute;left:0;right:0;top:0;height:4px;border-radius:3px 3px 0 0;
+  background:linear-gradient(90deg,transparent, rgba(255,210,140,.22), transparent);
 }
-.page-foot::before{content:"—  ";}.page-foot::after{content:"  —";}
 
-/* --- Contenu réutilisé --- */
-.lead{font-size:1.03rem;color:var(--ink-soft);}
-.lead strong{color:var(--ink);}
-.sub-block+.sub-block{margin-top:24px;}
-.block-head{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:3px;}
-.block-date{font-size:.74rem;font-weight:700;letter-spacing:.08em;color:var(--gold);white-space:nowrap;}
-.block-title{font-family:var(--serif);font-size:1.1rem;font-weight:700;margin:0;}
-.block-sub{font-size:.86rem;color:var(--ink-soft);font-style:italic;margin-bottom:6px;}
-.block-list{margin:6px 0 0;padding:0 0 0 20px;font-size:.92rem;}
-.block-list li{margin-bottom:4px;}
-.block-list li::marker{color:var(--gold);}
-
-.chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px;}
-.chip{
-  background:var(--paper-2);border:1px solid var(--line);border-radius:24px;
-  padding:7px 14px;font-size:.86rem;
+/* --- Pied du meuble --- */
+.shelf-leg{
+  margin:0 auto;width:64%;height:12px;
+  background:linear-gradient(90deg,#2c1908,#57391c 50%,#2c1908);
+  border-radius:0 0 6px 6px;
+  box-shadow:0 10px 18px -6px rgba(0,0,0,.7);
 }
-.chip strong{color:var(--gold);}
 
-.kv{list-style:none;margin:6px 0 0;padding:0;max-width:520px;}
-.kv li{display:flex;justify-content:space-between;gap:18px;padding:11px 0;border-bottom:1px solid var(--line);font-size:.95rem;}
-.kv li:last-child{border-bottom:0;}
-.kv .k{font-weight:600;}
-.kv .v{color:var(--ink-soft);text-align:right;}
-
-.contact-list{list-style:none;margin:8px 0 0;padding:0;max-width:520px;}
-.contact-list li{display:flex;gap:13px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line);font-size:.93rem;}
-.contact-list li:last-child{border-bottom:0;}
-.contact-list .ico{
-  flex:none;width:36px;height:36px;border-radius:50%;background:var(--paper-2);
-  display:grid;place-items:center;color:var(--gold);
+/* ================= LIVRE OUVERT (visionneuse) ================= */
+.viewer{
+  position:fixed;inset:0;z-index:60;
+  display:flex;align-items:center;justify-content:center;padding:4vh 3vw;
+  opacity:0;transition:opacity .45s ease;
 }
-.contact-list a{font-weight:600;}
-.contact-list a:hover{color:var(--gold);}
-.contact-list .note{display:block;font-size:.72rem;color:var(--ink-soft);font-weight:400;}
-
-/* Sommaire (page) */
-.sommaire-list{list-style:none;margin:0;padding:0;}
-.sommaire-list li{border-bottom:1px dotted var(--line);}
-.sommaire-link{
-  display:flex;align-items:baseline;gap:14px;width:100%;padding:11px 2px;
-  background:none;border:0;font:inherit;color:var(--ink);cursor:pointer;text-align:left;font-size:.97rem;
+.viewer.active{opacity:1;}
+.backdrop{
+  position:absolute;inset:0;cursor:pointer;
+  background:rgba(10,5,1,.7);
 }
-.sommaire-link:hover{color:var(--gold);}
-.sommaire-link:hover .no{color:var(--gold);}
-.sommaire-link .no{font-family:var(--serif);color:var(--ink-soft);min-width:30px;}
-.sommaire-link .dots{flex:1;border-bottom:1px dotted var(--line);}
-.sommaire-link .pg{font-family:var(--serif);color:var(--ink-soft);}
-
-/* Couverture & pages de fin */
-.leaf-cover .lf-front,.leaf-end .lf-front{
-  min-height:560px;
-  background:
-    radial-gradient(900px 500px at 20% 0%, rgba(224,192,120,.16), transparent 55%),
-    linear-gradient(165deg,var(--navy-2),var(--navy-3));
-  color:#f6eeda;display:flex;flex-direction:column;align-items:center;justify-content:center;
-  text-align:center;padding:56px 34px;box-shadow:none;
-}
-.leaf-cover .lf-front::before,.leaf-end .lf-front::before{display:none;}
-.leaf-cover .lf-front::after,.leaf-end .lf-front::after{
+.backdrop::after{
   content:"";position:absolute;inset:0;
+  background:radial-gradient(80% 70% at 50% 45%, transparent 55%, rgba(5,2,0,.55) 100%);
+}
+.openbook{
+  position:relative;z-index:2;width:min(960px,96vw);height:min(72vh,620px);
+  cursor:default;
+}
+.openbook.open{animation:bookArrive .6s cubic-bezier(.2,.72,.28,1) both;}
+@keyframes bookArrive{
+  0%{transform:translateY(42px) scale(.68);opacity:0;}
+  60%{transform:translateY(-8px) scale(1.03);opacity:1;}
+  100%{transform:translateY(0) scale(1);opacity:1;}
+}
+.openbook .book-base{
+  position:absolute;inset:0;
+  transform-style:preserve-3d;
+}
+.boards{
+  position:absolute;inset:0;z-index:2;border-radius:7px;
+  background:linear-gradient(165deg,#33200f,#1d1209);
+  box-shadow:
+    inset 0 0 34px rgba(7,3,0,.7),
+    0 30px 70px -18px rgba(0,0,0,.85),
+    0 0 60px rgba(236,206,108,.16);
+}
+.boards::before{
+  content:"";position:absolute;inset:9px;border-radius:4px;
+  border:1px solid rgba(222,180,92,.42);
+  box-shadow:0 0 0 1px rgba(0,0,0,.5), inset 0 0 10px rgba(0,0,0,.3);
+}
+.leaf-l,.leaf-r{
+  position:absolute;top:14px;bottom:14px;width:calc(50% - 24px);z-index:10;
   background:
-    radial-gradient(2px 2px at 20% 30%,rgba(255,255,255,.45),transparent 40%),
-    radial-gradient(1.5px 1.5px at 80% 60%,rgba(255,255,255,.35),transparent 40%),
-    radial-gradient(1.5px 1.5px at 50% 80%,rgba(255,255,255,.3),transparent 40%);
+    radial-gradient(120% 60% at 50% 0%, rgba(176,131,53,.1), transparent 55%),
+    linear-gradient(90deg, rgba(120,84,44,.1), transparent 9%, transparent 91%, rgba(120,84,44,.1)),
+    var(--paper);
+  color:var(--ink);
 }
-.medallion{
-  width:92px;height:92px;border-radius:50%;display:grid;place-items:center;
-  border:2px solid var(--gold-2);color:var(--gold-2);font-family:var(--serif);
-  font-size:2rem;letter-spacing:.08em;margin-bottom:24px;box-shadow:0 0 0 6px rgba(224,192,120,.12);
+.leaf-l{left:18px;border-radius:5px 2px 2px 5px;}
+.leaf-r{
+  right:18px;border-radius:2px 5px 5px 2px;overflow:auto;
+  padding:30px 28px 24px;box-shadow:inset 0 0 0 1px rgba(120,84,44,.22);
 }
-.cover-title{font-family:var(--serif);font-size:clamp(2.2rem,6vw,3.4rem);margin:0 0 8px;color:#fdf8ec;}
-.cover-sub{font-size:.85rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-2);margin-bottom:18px;}
-.cover-desc{max-width:560px;margin:0 auto 30px;color:rgba(246,238,218,.85);font-size:1rem;}
-.cover-btn{
-  appearance:none;cursor:pointer;border-radius:40px;font-family:var(--sans);
-  font-weight:600;letter-spacing:.03em;border:0;
-  background:var(--gold-2);color:var(--navy-3);padding:14px 30px;font-size:1rem;
-  box-shadow:0 12px 26px -10px rgba(0,0,0,.5);
-  transition:transform .18s,box-shadow .18s,background .18s;
+.openbook.open .leaf-r{animation:leafSettle .9s cubic-bezier(.2,.7,.3,1) .18s both;}
+@keyframes leafSettle{
+  0%{transform:perspective(1400px) rotateY(-16deg) scaleY(.985);opacity:.3;}
+  100%{transform:perspective(1400px) rotateY(0) scaleY(1);opacity:1;}
 }
-.cover-btn:hover,.cover-btn:focus-visible{transform:translateY(-2px);box-shadow:0 18px 30px -12px rgba(0,0,0,.55);}
-.cover-btn.ghost{background:transparent;color:var(--gold-2);border:2px solid var(--gold-2);box-shadow:none;}
-.cover-foot{margin-top:34px;font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(246,238,218,.5);}
-.cta-row{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;}
-
-/* Verso sombre pour couverture/pages de fin */
-.leaf-cover .lf-back,.leaf-end .lf-back{
-  background:linear-gradient(165deg,var(--navy-2),var(--navy-3));color:rgba(246,238,218,.75);
+.gutter{
+  position:absolute;top:10px;bottom:10px;left:50%;width:50px;transform:translateX(-50%);
+  z-index:22;pointer-events:none;
+  background:linear-gradient(90deg, transparent, rgba(60,45,25,.3), rgba(60,45,25,.48), rgba(60,45,25,.3), transparent);
 }
-.leaf-cover .lf-back .vs-label,.leaf-end .lf-back .vs-label{color:#f6eeda;}
-
-/* ==========================================================================
-   FEUILLETAGE (rotation des pages)
-   ========================================================================== */
-body.js .leaf.turning{
-  position:absolute;top:0;left:0;right:0;z-index:40;pointer-events:none;
-  transform-origin:left center;
-  transition:transform .72s cubic-bezier(.45,.1,.3,1);
-}
-body.js .leaf.turning.turning-fwd{transform:rotateY(-180deg);}
-
-/* ==========================================================================
-   SIGNETS & OUTILS
-   ========================================================================== */
-.ribbons{position:absolute;top:56px;right:14px;z-index:8;display:flex;flex-direction:column;gap:6px;}
-.ribbon{
-  appearance:none;border:0;cursor:pointer;font-family:var(--sans);
-  writing-mode:vertical-rl;letter-spacing:.08em;text-transform:uppercase;
-  font-size:.64rem;font-weight:600;color:#f3ecd8;background:var(--navy-2);
-  padding:13px 8px;border-radius:0 6px 6px 0;border-left:2px solid var(--gold-2);
-  box-shadow:0 3px 8px rgba(20,27,36,.25);transition:background .2s,padding-right .2s;
-}
-.ribbon:hover{background:var(--navy);padding-right:12px;}
-.ribbon[aria-current="page"]{background:var(--gold-2);color:var(--navy-3);border-left-color:var(--navy-3);}
-
-.book-tools{
-  display:flex;align-items:center;justify-content:space-between;gap:12px;
-  padding:16px 22px;border-top:1px solid rgba(224,192,120,.18);
-}
-.tool-btn{
-  appearance:none;border:1px solid rgba(224,192,120,.45);background:transparent;color:var(--gold-2);
-  border-radius:40px;padding:9px 18px;cursor:pointer;font-family:var(--sans);
-  font-weight:600;letter-spacing:.05em;display:inline-flex;align-items:center;gap:8px;transition:.2s;
-}
-.tool-btn:hover:not(:disabled),.tool-btn:focus-visible{background:rgba(224,192,120,.16);}
-.tool-btn:disabled{opacity:.32;cursor:not-allowed;}
-.progress{color:var(--gold-2);font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;text-align:center;margin:0 0 8px;}
-.dots{display:flex;gap:7px;justify-content:center;flex-wrap:wrap;}
-.dot{appearance:none;width:24px;height:6px;border-radius:4px;border:0;cursor:pointer;background:rgba(224,192,120,.35);padding:0;transition:background .2s;}
-.dot[aria-current="page"]{background:var(--gold-2);}
-.dot:hover{background:rgba(224,192,120,.6);}
-
-/* ==========================================================================
-   RESPONSIVE
-   ========================================================================== */
-@media (max-width:900px){
-  .ribbons{display:none;}
-  .book-body{margin:0 6px;}
-  .lf-front{padding:28px 28px 40px;}
-  .pile{display:none;}
-}
-@media (max-width:560px){
-  .stage{padding:22px 8px 52px;}
-  .book-topbar{padding:12px 14px;font-size:.68rem;}
-  .book-topbar .book-title span.book-label{display:none;}
-  .lf-front{padding:22px 20px 34px;min-height:380px;}
-  .leaf-cover .lf-front,.leaf-end .lf-front{min-height:480px;padding:40px 22px;}
-  .book-tools{flex-wrap:wrap;justify-content:center;}
-  .dots{order:3;width:100%;}
+.spine-fold{
+  position:absolute;top:0;bottom:0;left:50%;width:34px;transform:translateX(-50%);
+  z-index:21;pointer-events:none;
+  background:radial-gradient(closest-side at 50% 50%, rgba(0,0,0,.5), rgba(0,0,0,.14) 70%, transparent);
 }
 
-/* ==========================================================================
-   IMPRESSION / PDF
-   ========================================================================== */
+/* --- Couvertures extérieures --- */
+.cover-l,.cover-r{
+  position:absolute;top:0;bottom:0;width:50%;z-index:40;
+  backface-visibility:hidden;-webkit-backface-visibility:hidden;
+  background:linear-gradient(170deg,#241305,#120a04);
+  box-shadow:inset 0 0 44px rgba(0,0,0,.55);
+}
+.cover-l{left:0;border-radius:6px 2px 2px 6px;transform:rotateY(0);transform-origin:right center;}
+.cover-r{right:0;border-radius:2px 6px 6px 2px;transform:rotateY(0);transform-origin:left center;}
+.cover-l::before,.cover-r::before{
+  content:"";position:absolute;inset:12px;border-radius:3px;
+  border:1px solid rgba(224,182,86,.45);
+}
+.cover-l::after,.cover-r::after{
+  content:"HL";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  font-family:var(--serif);font-size:1.3rem;color:rgba(224,182,86,.5);letter-spacing:.1em;
+}
+.openbook.open .cover-l{animation:openCoverL .95s cubic-bezier(.5,.05,.3,1) forwards;}
+.openbook.open .cover-r{animation:openCoverR .95s cubic-bezier(.5,.05,.3,1) forwards;}
+.openbook.closing .cover-l{animation:closeCoverL .7s cubic-bezier(.55,.06,.68,.19) forwards;}
+.openbook.closing .cover-r{animation:closeCoverR .7s cubic-bezier(.55,.06,.68,.19) forwards;}
+@keyframes openCoverL{0%{transform:rotateY(0);}60%{transform:rotateY(-120deg);}100%{transform:rotateY(-172deg);}}
+@keyframes openCoverR{0%{transform:rotateY(0);}60%{transform:rotateY(120deg);}100%{transform:rotateY(172deg);}}
+@keyframes closeCoverL{0%{transform:rotateY(-172deg);}100%{transform:rotateY(0);}}
+@keyframes closeCoverR{0%{transform:rotateY(172deg);}100%{transform:rotateY(0);}}
+
+.openbook .leaf-l{padding:24px;}
+.ll-inner{
+  height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:14px;text-align:center;
+}
+.ll-num{
+  font-family:var(--serif);font-size:clamp(2.4rem,7vh,4rem);line-height:1;
+  color:#6a4a12;text-shadow:0 1px 0 rgba(255,255,255,.4);
+}
+.ll-label{
+  font-family:var(--serif);font-size:.86rem;letter-spacing:.24em;text-transform:uppercase;
+  color:var(--ink);opacity:.75;
+}
+.vs-ornament{display:block;width:44px;height:1px;background:var(--gold);}
+.ll-seal{
+  width:58px;height:58px;border-radius:50%;border:1.5px solid var(--gold);
+  display:grid;place-items:center;font-family:var(--serif);color:#7a5a1e;font-size:1rem;
+  box-shadow:0 0 0 4px rgba(122,90,30,.12);
+}
+.ll-folio{margin-top:10px;font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;color:#7a5a1e;}
+
+.viewer-close{
+  appearance:none;position:absolute;top:-14px;right:-10px;z-index:60;
+  width:38px;height:38px;border-radius:50%;cursor:pointer;
+  border:1px solid #5d4412;color:#f6e6b0;font-size:1.15rem;line-height:1;
+  background:radial-gradient(circle at 30% 25%, #e6c867, #b8892b 70%, #8a5f18);
+  box-shadow:0 6px 14px rgba(0,0,0,.5), inset 0 1px 2px rgba(255,255,255,.5);
+  transition:transform .18s;
+}
+.viewer-close:hover,.viewer-close:focus-visible{transform:rotate(90deg) scale(1.08);}
+
+/* ================= CONTENU MANUSCRIT (page droite) ================= */
+.page-head{margin:0 0 20px;}
+.head-top{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;}
+.rub-num{font-size:.62rem;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);font-weight:700;}
+.folio{font-family:var(--serif);font-size:.78rem;color:var(--ink);opacity:.6;}
+.page-head h2{font-family:var(--serif);font-size:clamp(1.35rem,3.4vh,1.8rem);margin:8px 0 0;line-height:1.18;color:#241608;}
+.head-rule{width:52px;height:3px;background:var(--gold);border-radius:2px;margin-top:12px;}
+.lead{font-size:.94rem;color:#3c2c16;}
+.lead strong{color:#241608;}
+.sub-block+.sub-block{margin-top:18px;}
+.block-head{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:2px;}
+.block-date{font-size:.7rem;font-weight:700;letter-spacing:.06em;color:var(--gold);white-space:nowrap;}
+.block-title{font-family:var(--serif);font-size:1rem;font-weight:700;margin:0;line-height:1.3;color:#241608;}
+.block-sub{font-size:.82rem;color:#5c4a30;font-style:italic;margin-bottom:4px;}
+.block-list{margin:5px 0 0;padding:0 0 0 18px;font-size:.86rem;color:#3c2c16;}
+.block-list li{margin-bottom:3px;}
+.block-list li::marker{color:var(--gold);}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px;}
+.chip{background:var(--paper-2);border:1px solid var(--line);border-radius:22px;padding:6px 12px;font-size:.82rem;color:#3c2c16;}
+.chip strong{color:#7a5a1e;}
+.kv{list-style:none;margin:6px 0 0;padding:0;}
+.kv li{display:flex;justify-content:space-between;gap:14px;padding:9px 0;border-bottom:1px solid var(--line);font-size:.88rem;color:#3c2c16;}
+.kv li:last-child{border-bottom:0;}
+.kv .k{font-weight:600;color:#241608;}
+.kv .v{color:#5c4a30;text-align:right;}
+.contact-list{list-style:none;margin:8px 0 0;padding:0;}
+.contact-list li{display:flex;gap:12px;align-items:center;padding:8px 0;border-bottom:1px solid var(--line);font-size:.88rem;color:#3c2c16;}
+.contact-list li:last-child{border-bottom:0;}
+.contact-list .ico{flex:none;width:34px;height:34px;border-radius:50%;background:var(--paper-2);display:grid;place-items:center;color:var(--gold);}
+.contact-list a{font-weight:600;color:#241608;}
+.contact-list a:hover{color:#7a5a1e;}
+.contact-list .note{display:block;font-size:.68rem;color:#5c4a30;font-weight:400;}
+
+/* ================= PIED ================= */
+.lib-foot{
+  position:relative;z-index:3;text-align:center;
+  padding:6px 16px 26px;font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;
+  color:rgba(236,206,108,.5);
+}
+.pdf-btn{
+  appearance:none;cursor:pointer;font:inherit;letter-spacing:inherit;text-transform:inherit;
+  background:transparent;border:1px solid rgba(236,206,108,.4);color:inherit;
+  border-radius:30px;padding:6px 16px;margin-left:10px;transition:.2s;
+}
+.pdf-btn:hover,.pdf-btn:focus-visible{background:rgba(236,206,108,.14);}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width:640px){
+  .plaque-wrap{padding:30px 10px 0;}
+  .plaque{padding:18px 14px 16px;}
+  .pla-kicker{letter-spacing:.18em;font-size:.6rem;}
+  .pla-sub{font-size:.86rem;}
+  .library{padding:26px 6px 14px;}
+  .books-row{gap:8px;padding:0 10px;}
+  .bookend{margin:0 -16px 0 0;}
+  .bookend:last-of-type{margin:0 0 0 -16px;}
+  .sconce{width:110px;height:110px;top:40px;}
+  .lib-foot{font-size:.58rem;}
+  .openbook{width:98vw;}
+  .leaf-l,.leaf-r{width:calc(50% - 16px);}
+  .leaf-l{left:11px;}
+  .leaf-r{right:11px;padding:20px 16px 16px;}
+  .viewer-close{right:2px;}
+}
+
+/* ================= IMPRESSION ================= */
+.print-area{display:none;}
 @media print{
-  body{background:#fff;}
-  .stage{padding:0;max-width:none;}
-  .book{box-shadow:none;max-width:none;margin:0;}
-  .book-topbar,.book-tools,.ribbons,.skip-link,.pile{display:none!important;}
-  .book-body{margin:0;border-radius:0;perspective:none!important;}
-  body.js .leaf{display:block!important;break-after:page;}
-  body.js .leaf .lf-back{display:none!important;}
-  body.js .leaf-cover{display:none!important;}
-  body.js .leaf.active{display:block;}
-  .lf-front{min-height:0;box-shadow:none;}
-  .leaf-cover .lf-front,.leaf-end .lf-front{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
-  .book .book-body::after,.book::before{display:none;}
+  body{background:#fff;color:#000;}
+  .wall,.arch,.pillar,.sconce,.mote,.viewer,.plaque-wrap,.library,.lib-foot,.skip-link{display:none!important;}
+  .lib{display:block;min-height:0;}
+  .print-area{display:block;}
+  .print-rub{
+    page-break-after:always;color:#000;
+    font-size:.9rem;max-width:900px;margin:0 auto;padding:18px 22px;
+  }
+  .print-rub .leaf-head{
+    text-align:center;margin-bottom:10px;
+    font-family:var(--serif);letter-spacing:.1em;
+  }
+  .print-rub h2{font-size:1.5rem;margin:2px 0;}
 }
 
-/* ==========================================================================
-   SANS JAVASCRIPT
-   ========================================================================== */
-html.no-js .leaf .lf-back{display:none;}
-html.no-js .ribbons,html.no-js .book-tools{display:none;}
-html.no-js .folio,html.no-js .page-foot{display:none;}
+/* ================= SANS JAVASCRIPT ================= */
+html.no-js .viewer{display:none;}
 </style>
 </head>
 <body>
 
-<a class="skip-link" href="#book">Aller au livre</a>
+<a class="skip-link" href="#shelf">Aller à l'étagère</a>
+<p class="sr-only" id="status" aria-live="polite"></p>
 
-<main class="stage">
-<div class="book" id="book">
+<main class="lib">
+  <div class="wall" aria-hidden="true"></div>
+  <div class="arch" aria-hidden="true"></div>
+  <div class="pillar pillar-l" aria-hidden="true"></div>
+  <div class="pillar pillar-r" aria-hidden="true"></div>
+  <div class="sconce sconce-l" aria-hidden="true"></div>
+  <div class="sconce sconce-r" aria-hidden="true"></div>
+  <span class="mote" style="left:12%;top:30%;animation-delay:0s" aria-hidden="true"></span>
+  <span class="mote" style="left:22%;top:60%;animation-delay:3s" aria-hidden="true"></span>
+  <span class="mote" style="left:34%;top:20%;animation-delay:6s" aria-hidden="true"></span>
+  <span class="mote" style="left:63%;top:45%;animation-delay:9s" aria-hidden="true"></span>
+  <span class="mote" style="left:74%;top:25%;animation-delay:1.5s" aria-hidden="true"></span>
+  <span class="mote" style="left:86%;top:55%;animation-delay:4.5s" aria-hidden="true"></span>
 
-  <div class="book-topbar">
-    <div class="book-title">
-      <span class="seal" aria-hidden="true">HL</span>
-      <span class="book-label">Curriculum Vitae — Hugo Largeron</span>
+  <header class="plaque-wrap">
+    <div class="plaque">
+      <p class="pla-kicker">Curriculum Vitae · 2026</p>
+      <h1 class="pla-title">Hugo Largeron</h1>
+      <div class="pla-rule" aria-hidden="true"></div>
+      <p class="pla-sub">Ancien militaire et coach sportif de 26 ans, en reconversion vers l'informatique — étudiant BTS SIO SISR à Saint-Étienne. Choisissez un ouvrage pour découvrir mon parcours, mes compétences et mes contacts.</p>
     </div>
-    <div class="book-actions">
-      <button class="icon-btn" id="btnPrint" type="button" onclick="window.print()">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9V2h12v7"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
-        <span>PDF</span>
-      </button>
+  </header>
+
+  <section class="library" id="shelf">
+
+    <div class="shelf-zone">
+      <nav class="books-row" aria-label="Rubriques du curriculum vitae">
+        <span class="bookend" aria-hidden="true"></span>
+
+        <button class="book b1" type="button" data-rub="profil" aria-label="Rubrique : Profil">
+          <span class="bspine"><i class="band" aria-hidden="true"></i><span class="btitle">Profil</span><i class="band" aria-hidden="true"></i></span>
+        </button>
+        <button class="book b2" type="button" data-rub="experience" aria-label="Rubrique : Expériences professionnelles">
+          <span class="bspine"><i class="band" aria-hidden="true"></i><span class="btitle">Parcours</span><i class="band" aria-hidden="true"></i></span>
+        </button>
+        <button class="book b3" type="button" data-rub="competences" aria-label="Rubrique : Compétences techniques">
+          <span class="bspine"><i class="band" aria-hidden="true"></i><span class="btitle">Compétences</span><i class="band" aria-hidden="true"></i></span>
+        </button>
+        <button class="book b4" type="button" data-rub="formation" aria-label="Rubrique : Formations et diplômes">
+          <span class="bspine"><i class="band" aria-hidden="true"></i><span class="btitle">Formations</span><i class="band" aria-hidden="true"></i></span>
+        </button>
+        <button class="book b5" type="button" data-rub="langues" aria-label="Rubrique : Langues">
+          <span class="bspine"><i class="band" aria-hidden="true"></i><span class="btitle">Langues</span><i class="band" aria-hidden="true"></i></span>
+        </button>
+        <button class="book b6" type="button" data-rub="permis" aria-label="Rubrique : Permis et CACES">
+          <span class="bspine"><i class="band" aria-hidden="true"></i><span class="btitle">Permis</span><i class="band" aria-hidden="true"></i></span>
+        </button>
+        <button class="book b7" type="button" data-rub="contact" aria-label="Rubrique : Contact">
+          <span class="bspine"><i class="band" aria-hidden="true"></i><span class="btitle">Contact</span><i class="band" aria-hidden="true"></i></span>
+        </button>
+
+        <span class="bookend" aria-hidden="true"></span>
+      </nav>
+      <div class="shelf-board" aria-hidden="true"></div>
+      <div class="shelf-leg" aria-hidden="true"></div>
+    </div>
+
+  </section>
+
+  <footer class="lib-foot">
+    Édition 2026 · Saint-Étienne
+    <button class="pdf-btn" type="button" onclick="window.print()">Exporter en PDF</button>
+  </footer>
+
+  <!-- Visionneuse : livre ouvert -->
+  <div class="viewer" id="viewer" hidden>
+    <div class="backdrop" id="backdrop" aria-hidden="true"></div>
+    <div class="openbook" id="openbook" role="dialog" aria-modal="true" tabindex="-1">
+      <div class="book-base">
+        <div class="boards" aria-hidden="true"></div>
+        <div class="leaf-l" id="leafL" aria-hidden="true"></div>
+        <div class="leaf-r" id="leafR"></div>
+        <div class="gutter" aria-hidden="true"></div>
+        <div class="spine-fold" aria-hidden="true"></div>
+        <div class="cover-l" aria-hidden="true"></div>
+        <div class="cover-r" aria-hidden="true"></div>
+      </div>
+      <button class="viewer-close" id="viewerClose" type="button" aria-label="Fermer le livre">×</button>
     </div>
   </div>
-
-  <div class="book-body" id="book-body">
-
-    <!-- Tranche des pages déjà lues -->
-    <div class="pile" id="pile" aria-hidden="true"></div>
-
-    <div class="leaf-stack" id="leaf-stack" role="group" aria-label="Livre du CV — feuillet courant : couverture">
-
-      <!-- ============ COUVERTURE ============ -->
-      <section class="leaf leaf-cover" id="leaf-front" aria-label="Couverture">
-        <div class="lf-front">
-          <div class="medallion" role="img" aria-label="Initiales HL">HL</div>
-          <h1 class="cover-title">Hugo Largeron</h1>
-          <p class="cover-sub">BTS SIO SISR — Cybersécurité</p>
-          <p class="cover-desc">Ancien militaire, coach sportif et futur professionnel de la cybersécurité. Ce livre raconte un parcours de reconversion, une expérience et des compétences.</p>
-          <button id="btnOpen" class="cover-btn" type="button">Ouvrir le livre</button>
-          <p class="cover-foot">Édition 2026 · Saint-Étienne</p>
-        </div>
-        <div class="lf-back" aria-hidden="true"></div>
-      </section>
-
-      <!-- ============ SOMMAIRE ============ -->
-      <section class="leaf" id="leaf-sommaire" aria-label="Sommaire">
-        <div class="lf-front">
-          <header class="page-head">
-            <div class="head-top">
-              <span class="rub-num">Chapitre I · Le plan</span>
-              <span class="folio">p. 1</span>
-            </div>
-            <h2>Sommaire</h2>
-            <div class="head-rule" aria-hidden="true"></div>
-          </header>
-          <div class="page-body">
-            <ul class="sommaire-list">
-              <li><button class="sommaire-link" type="button" data-to="leaf-profil"><span class="no">II</span><span>Profil</span><span class="dots" aria-hidden="true"></span><span class="pg">p. 2</span></button></li>
-              <li><button class="sommaire-link" type="button" data-to="leaf-experience"><span class="no">III</span><span>Expériences professionnelles</span><span class="dots" aria-hidden="true"></span><span class="pg">p. 3</span></button></li>
-              <li><button class="sommaire-link" type="button" data-to="leaf-competences"><span class="no">IV</span><span>Compétences techniques</span><span class="dots" aria-hidden="true"></span><span class="pg">p. 4</span></button></li>
-              <li><button class="sommaire-link" type="button" data-to="leaf-formation"><span class="no">V</span><span>Formations &amp; diplômes</span><span class="dots" aria-hidden="true"></span><span class="pg">p. 5</span></button></li>
-              <li><button class="sommaire-link" type="button" data-to="leaf-langues"><span class="no">VI</span><span>Langues</span><span class="dots" aria-hidden="true"></span><span class="pg">p. 6</span></button></li>
-              <li><button class="sommaire-link" type="button" data-to="leaf-permis"><span class="no">VII</span><span>Permis &amp; CACES</span><span class="dots" aria-hidden="true"></span><span class="pg">p. 7</span></button></li>
-              <li><button class="sommaire-link" type="button" data-to="leaf-contact"><span class="no">VIII</span><span>Contact</span><span class="dots" aria-hidden="true"></span><span class="pg">p. 8</span></button></li>
-              <li><button class="sommaire-link" type="button" data-to="leaf-front"><span class="no">—</span><span>Retour à la couverture</span><span class="dots" aria-hidden="true"></span></button></li>
-            </ul>
-          </div>
-          <p class="page-foot">p. 1</p>
-        </div>
-        <div class="lf-back" aria-hidden="true"></div>
-      </section>
-
-      <!-- ============ PROFIL ============ -->
-      <section class="leaf" id="leaf-profil" aria-label="Profil">
-        <div class="lf-front">
-          <header class="page-head">
-            <div class="head-top">
-              <span class="rub-num">Chapitre II</span>
-              <span class="folio">p. 2</span>
-            </div>
-            <h2>Profil</h2>
-            <div class="head-rule" aria-hidden="true"></div>
-          </header>
-          <div class="page-body">
-            <p class="lead">Ancien militaire et coach sportif de 26 ans, je me reconvertis actuellement dans le domaine informatique, afin d'intégrer, par la suite, un cursus dans la <strong>cybersécurité</strong>. Je suis actuellement en <strong>BTS SIO SISR</strong> au CFAI de Saint-Étienne, et en alternance dans une entreprise.</p>
-          </div>
-          <p class="page-foot">p. 2</p>
-        </div>
-        <div class="lf-back" aria-hidden="true"></div>
-      </section>
-
-      <!-- ============ EXPÉRIENCES ============ -->
-      <section class="leaf" id="leaf-experience" aria-label="Expériences professionnelles">
-        <div class="lf-front">
-          <header class="page-head">
-            <div class="head-top">
-              <span class="rub-num">Chapitre III</span>
-              <span class="folio">p. 3</span>
-            </div>
-            <h2>Expériences professionnelles</h2>
-            <div class="head-rule" aria-hidden="true"></div>
-          </header>
-          <div class="page-body">
-
-            <div class="sub-block">
-              <div class="block-head"><span class="block-date">2025 — 2026</span><h3 class="block-title">Stage en milieu hospitalier</h3></div>
-              <p class="block-sub">CHU Saint-Étienne, 42</p>
-              <ul class="block-list">
-                <li>Recherches sur la maigreur constitutionnelle</li>
-                <li>Encadrement des patientes sur leur protocole d'activité physique sur 2 mois</li>
-              </ul>
-            </div>
-
-            <div class="sub-block">
-              <div class="block-head"><span class="block-date">2025</span><h3 class="block-title">Coach sportif</h3></div>
-              <p class="block-sub">Espace Cardio, Saint-Étienne, 42</p>
-              <ul class="block-list"><li>Cours collectif type bodysculpt, aquabike</li></ul>
-            </div>
-
-            <div class="sub-block">
-              <div class="block-head"><span class="block-date">2022 — 2025</span><h3 class="block-title">Stage au sein de clubs de natation</h3></div>
-              <p class="block-sub">SEAM et ASPTT, Saint-Étienne, 42</p>
-              <ul class="block-list">
-                <li>Intervention en aisance aquatique</li>
-                <li>Entraînement supervisé du groupe ado loisir</li>
-                <li>Interventions pédagogiques sur la préparation physique de l'équipe 1 / sport-étude</li>
-                <li>Entraînements en autonomie de préparation physique de l'équipe 1 / sport-étude</li>
-              </ul>
-            </div>
-
-            <div class="sub-block">
-              <div class="block-head"><span class="block-date">Été 2024 — 2025</span><h3 class="block-title">Secouriste aquatique</h3></div>
-              <p class="block-sub">Piscine municipale, Saint-Étienne, 42</p>
-              <ul class="block-list"><li>Poste de BNSSA</li></ul>
-            </div>
-
-            <div class="sub-block">
-              <div class="block-head"><span class="block-date">Été 2025</span><h3 class="block-title">Chauffeur-livreur</h3></div>
-              <p class="block-sub">Rouzès, Saint-Étienne, 42</p>
-              <ul class="block-list">
-                <li>Transport de matériel de BTP</li>
-                <li>Opération de manutention</li>
-              </ul>
-            </div>
-
-            <div class="sub-block">
-              <div class="block-head"><span class="block-date">2021 — 2022 &amp; été 2023</span><h3 class="block-title">Manutentionnaire</h3></div>
-              <p class="block-sub">Easydis, 42</p>
-              <ul class="block-list">
-                <li>Préparateur de commande</li>
-                <li>Rouleur sur transpalette à conducteur auto-porté</li>
-              </ul>
-            </div>
-
-            <div class="sub-block">
-              <div class="block-head"><span class="block-date">2018 — 2021</span><h3 class="block-title">Soldat</h3></div>
-              <p class="block-sub">21e Régiment d'Infanterie de Marine, Fréjus, 83</p>
-              <ul class="block-list">
-                <li>Formation de soldat — combattant infanterie</li>
-                <li>Formation en système de transmission et système de communication</li>
-                <li>Formation de chef d'équipe</li>
-                <li>2 déploiements</li>
-              </ul>
-            </div>
-
-          </div>
-          <p class="page-foot">p. 3</p>
-        </div>
-        <div class="lf-back" aria-hidden="true"></div>
-      </section>
-
-      <!-- ============ COMPÉTENCES ============ -->
-      <section class="leaf" id="leaf-competences" aria-label="Compétences techniques">
-        <div class="lf-front">
-          <header class="page-head">
-            <div class="head-top">
-              <span class="rub-num">Chapitre IV</span>
-              <span class="folio">p. 4</span>
-            </div>
-            <h2>Compétences techniques</h2>
-            <div class="head-rule" aria-hidden="true"></div>
-          </header>
-          <div class="page-body">
-            <p class="lead">Réseaux, systèmes, programmation et sécurité : les bases que je consolide chaque jour.</p>
-            <div class="chips">
-              <span class="chip">Gestion de réseaux <strong>Windows / Linux (Ubuntu)</strong> en machine virtuelle</span>
-              <span class="chip">Bases des réseaux — modèle <strong>OSI</strong>, <strong>TCP/IP</strong></span>
-              <span class="chip">Commandes de base <strong>Bash</strong></span>
-              <span class="chip">Programmation — <strong>Python</strong>, <strong>C++</strong>, <strong>C#</strong></span>
-              <span class="chip">Cybersécurité — <strong>Hack The Box</strong>, <strong>TryHackMe</strong></span>
-            </div>
-          </div>
-          <p class="page-foot">p. 4</p>
-        </div>
-        <div class="lf-back" aria-hidden="true"></div>
-      </section>
-
-      <!-- ============ FORMATIONS ============ -->
-      <section class="leaf" id="leaf-formation" aria-label="Formations et diplômes">
-        <div class="lf-front">
-          <header class="page-head">
-            <div class="head-top">
-              <span class="rub-num">Chapitre V</span>
-              <span class="folio">p. 5</span>
-            </div>
-            <h2>Formations &amp; diplômes</h2>
-            <div class="head-rule" aria-hidden="true"></div>
-          </header>
-          <div class="page-body">
-
-            <div class="sub-block">
-              <div class="block-head"><span class="block-date">2022 — 2025</span><h3 class="block-title">Licence STAPS ES — supplément AFF, option haltérophilie</h3></div>
-              <p class="block-sub">Université Jean Monnet, Saint-Étienne</p>
-              <ul class="block-list"><li>3ᵉ année de Licence STAPS APAS en cours</li></ul>
-            </div>
-
-            <div class="sub-block">
-              <div class="block-head"><span class="block-date">2024</span><h3 class="block-title">BNSSA</h3></div>
-              <p class="block-sub">Union Départementale des Sapeurs-Pompiers de la Loire (UDSPL)</p>
-              <ul class="block-list"><li>Brevet national de sécurité et de sauvetage aquatique</li></ul>
-            </div>
-
-            <div class="sub-block">
-              <div class="block-head"><span class="block-date">2024</span><h3 class="block-title">PSE1</h3></div>
-              <p class="block-sub">Union Départementale des Sapeurs-Pompiers de la Loire (UDSPL)</p>
-              <ul class="block-list"><li>Premiers secours en équipe de niveau 1</li></ul>
-            </div>
-
-            <div class="sub-block">
-              <div class="block-head"><span class="block-date">2018</span><h3 class="block-title">Baccalauréat S</h3></div>
-              <p class="block-sub">Lycée Simone Weil, Saint-Priest-en-Jarez</p>
-              <ul class="block-list"><li>Obtention du baccalauréat scientifique, spécialité SVT</li></ul>
-            </div>
-
-          </div>
-          <p class="page-foot">p. 5</p>
-        </div>
-        <div class="lf-back" aria-hidden="true"></div>
-      </section>
-
-      <!-- ============ LANGUES ============ -->
-      <section class="leaf" id="leaf-langues" aria-label="Langues">
-        <div class="lf-front">
-          <header class="page-head">
-            <div class="head-top">
-              <span class="rub-num">Chapitre VI</span>
-              <span class="folio">p. 6</span>
-            </div>
-            <h2>Langues</h2>
-            <div class="head-rule" aria-hidden="true"></div>
-          </header>
-          <div class="page-body">
-            <ul class="kv">
-              <li><span class="k">Français</span><span class="v">Langue maternelle</span></li>
-              <li><span class="k">Anglais</span><span class="v">B2 – C1</span></li>
-            </ul>
-          </div>
-          <p class="page-foot">p. 6</p>
-        </div>
-        <div class="lf-back" aria-hidden="true"></div>
-      </section>
-
-      <!-- ============ PERMIS ============ -->
-      <section class="leaf" id="leaf-permis" aria-label="Permis et CACES">
-        <div class="lf-front">
-          <header class="page-head">
-            <div class="head-top">
-              <span class="rub-num">Chapitre VII</span>
-              <span class="folio">p. 7</span>
-            </div>
-            <h2>Permis &amp; CACES</h2>
-            <div class="head-rule" aria-hidden="true"></div>
-          </header>
-          <div class="page-body">
-            <ul class="kv">
-              <li><span class="k">Permis B</span><span class="v">Véhiculé</span></li>
-              <li><span class="k">Permis A1</span><span class="v">Moto légère</span></li>
-              <li><span class="k">CACES 1A</span><span class="v">Engins de chantier</span></li>
-            </ul>
-          </div>
-          <p class="page-foot">p. 7</p>
-        </div>
-        <div class="lf-back" aria-hidden="true"></div>
-      </section>
-
-      <!-- ============ CONTACT ============ -->
-      <section class="leaf" id="leaf-contact" aria-label="Contact">
-        <div class="lf-front">
-          <header class="page-head">
-            <div class="head-top">
-              <span class="rub-num">Chapitre VIII</span>
-              <span class="folio">p. 8</span>
-            </div>
-            <h2>Contact</h2>
-            <div class="head-rule" aria-hidden="true"></div>
-          </header>
-          <div class="page-body">
-            <ul class="contact-list">
-              <li>
-                <span class="ico" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span>
-                <span>06 ** ** ** **</span>
-              </li>
-              <li>
-                <span class="ico" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg></span>
-                <a href="mailto:mail@gmail.com">mail@gmail.com</a>
-              </li>
-              <li>
-                <span class="ico" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-4 1.5-4-2.5-6-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg></span>
-                <span><a href="https://github.com/HugoLargeron" target="_blank" rel="noopener noreferrer">HugoLargeron <span class="note">github.com · nouvelle fenêtre</span></a></span>
-              </li>
-              <li>
-                <span class="ico" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
-                <span>Saint-Étienne, France</span>
-              </li>
-            </ul>
-          </div>
-          <p class="page-foot">p. 8</p>
-        </div>
-        <div class="lf-back" aria-hidden="true"></div>
-      </section>
-
-      <!-- ============ 4e DE COUVERTURE ============ -->
-      <section class="leaf leaf-end" id="leaf-end" aria-label="Fin de lecture">
-        <div class="lf-front">
-          <div class="medallion" role="img" aria-label="Initiales HL">HL</div>
-          <h2 class="cover-title" style="font-size:clamp(1.8rem,4vw,2.6rem)">Merci de votre lecture</h2>
-          <p class="cover-sub">Rigorosité · Discipline · Apprentissage</p>
-          <p class="cover-desc">De la natation à la prise de commandement, du transpalette aux serveurs : chaque page compte. Si mon profil vous intéresse, contactez-moi.</p>
-          <div class="cta-row">
-            <button class="cover-btn" id="btnBackCover" type="button">Retourner à la couverture</button>
-            <button class="cover-btn ghost" type="button" onclick="window.print()">Télécharger en PDF</button>
-          </div>
-          <p class="cover-foot">Hugo Largeron · Saint-Étienne · <a href="https://github.com/HugoLargeron" target="_blank" rel="noopener noreferrer" style="color:var(--gold-2)">GitHub</a></p>
-        </div>
-        <div class="lf-back" aria-hidden="true"></div>
-      </section>
-
-    </div><!-- /leaf-stack -->
-
-    <!-- Signets / rubriques -->
-    <nav class="ribbons" aria-label="Rubriques du livre" id="ribbons">
-      <button class="ribbon" type="button" data-to="leaf-sommaire" aria-label="Aller au sommaire">Sommaire</button>
-      <button class="ribbon" type="button" data-to="leaf-profil" aria-label="Chapitre II — Profil">Profil</button>
-      <button class="ribbon" type="button" data-to="leaf-experience" aria-label="Chapitre III — Expériences professionnelles">Parcours</button>
-      <button class="ribbon" type="button" data-to="leaf-competences" aria-label="Chapitre IV — Compétences techniques">Compétences</button>
-      <button class="ribbon" type="button" data-to="leaf-formation" aria-label="Chapitre V — Formations et diplômes">Formations</button>
-      <button class="ribbon" type="button" data-to="leaf-langues" aria-label="Chapitre VI — Langues">Langues</button>
-      <button class="ribbon" type="button" data-to="leaf-permis" aria-label="Chapitre VII — Permis et CACES">Permis</button>
-      <button class="ribbon" type="button" data-to="leaf-contact" aria-label="Chapitre VIII — Contact">Contact</button>
-    </nav>
-
-  </div><!-- /book-body -->
-
-  <div class="book-tools">
-    <button class="tool-btn" id="btnPrev" type="button" aria-label="Feuillet précédent">
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
-      <span>Précédent</span>
-    </button>
-    <div class="tools-mid">
-      <p class="progress" id="progress" aria-live="polite">Couverture</p>
-      <div class="dots" id="dots" role="group" aria-label="Atteindre un feuillet du livre"></div>
-    </div>
-    <button class="tool-btn" id="btnNext" type="button" aria-label="Feuillet suivant">
-      <span>Suivant</span>
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
-    </button>
-  </div>
-
-  <noscript><p style="color:#fff;padding:14px 22px;font-size:.85rem;">Le livre est affiché ci-dessous feuillet par feuillet (JavaScript désactivé).</p></noscript>
-</div>
 </main>
+
+<div class="print-area" id="printArea" aria-hidden="true"></div>
+
+<noscript>
+  <div style="max-width:760px;margin:24px auto;padding:24px;background:#f4ead0;color:#241a10;border-radius:10px;line-height:1.7">
+    <h2>Hugo Largeron — BTS SIO SISR</h2>
+    <p>Ancien militaire et coach sportif de 26 ans, en reconversion vers l'informatique (cybersécurité).</p>
+    <p>Pour me contacter : <a href="mailto:mail@gmail.com">mail@gmail.com</a> · Saint-Étienne · <a href="https://github.com/HugoLargeron" target="_blank" rel="noopener noreferrer">github.com/HugoLargeron</a></p>
+    <p style="opacity:.7">Activez JavaScript pour parcourir la bibliothèque.</p>
+  </div>
+</noscript>
 
 <script>
 (function(){
   'use strict';
 
-  var stack = document.getElementById('leaf-stack');
-  var leaves = Array.prototype.slice.call(stack.querySelectorAll('.leaf'));
-  var ids = leaves.map(function(l){ return l.id; });
-  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var books = Array.prototype.slice.call(document.querySelectorAll('.book'));
+  var viewer = document.getElementById('viewer');
+  var openbook = document.getElementById('openbook');
+  var backdrop = document.getElementById('backdrop');
+  var leafL = document.getElementById('leafL');
+  var leafR = document.getElementById('leafR');
+  var closeBtn = document.getElementById('viewerClose');
+  var statusEl = document.getElementById('status');
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  var btnOpen = document.getElementById('btnOpen');
-  var btnBack = document.getElementById('btnBackCover');
-  var btnPrev = document.getElementById('btnPrev');
-  var btnNext = document.getElementById('btnNext');
-  var progressEl = document.getElementById('progress');
-  var dotsEl = document.getElementById('dots');
-  var pile = document.getElementById('pile');
-  var ribbons = Array.prototype.slice.call(document.querySelectorAll('.ribbon'));
-  var sommaireLinks = Array.prototype.slice.call(document.querySelectorAll('.sommaire-link'));
-
-  var idx = 0;
-  var turning = false;
-
-  var LABEL = {
-    'leaf-front': 'Couverture',
-    'leaf-sommaire': 'Sommaire',
-    'leaf-profil': 'Profil',
-    'leaf-experience': 'Expériences professionnelles',
-    'leaf-competences': 'Compétences techniques',
-    'leaf-formation': 'Formations & diplômes',
-    'leaf-langues': 'Langues',
-    'leaf-permis': 'Permis & CACES',
-    'leaf-contact': 'Contact',
-    'leaf-end': 'Fin de lecture'
+  var RUBS = {
+    profil:    { num:'I',   chap:'Chapitre I',    folio:'p. 1', title:'Profil' },
+    experience:{ num:'II',  chap:'Chapitre II',   folio:'p. 2', title:'Parcours' },
+    competences:{num:'III', chap:'Chapitre III',  folio:'p. 3', title:'Compétences' },
+    formation: { num:'IV',  chap:'Chapitre IV',   folio:'p. 4', title:'Formations' },
+    langues:   { num:'V',   chap:'Chapitre V',    folio:'p. 5', title:'Langues' },
+    permis:    { num:'VI',  chap:'Chapitre VI',   folio:'p. 6', title:'Permis & CACES' },
+    contact:   { num:'VII', chap:'Chapitre VII',  folio:'p. 7', title:'Contact' }
   };
-  var ROMAN = ['','I','II','III','IV','V','VI','VII','VIII'];
 
-  // Position initiale (couverture, ou ancre dans l'URL)
-  var initialId = (location.hash || '').slice(1);
-  if (ids.indexOf(initialId) > -1) idx = ids.indexOf(initialId);
-  leaves[idx].classList.add('active');
-  setHeight();
+  var openRub = null;
+  var lastBook = null;
 
-  function pageEl(i){ return leaves[i]; }
-  function currentId(){ return ids[idx]; }
-  function label(i){ return LABEL[ids[i]] || ids[i]; }
+  function openViewer(rub, btn){
+    lastBook = btn;
+    openRub = rub;
+    var cfg = RUBS[rub];
+    var tpl = document.getElementById('rub-' + rub);
 
-  // --- Verso de chaque feuillet (indiqué par JS) ---
-  leaves.forEach(function(leaf, i){
-    var back = leaf.querySelector('.lf-back');
-    if (!back) return;
-    var l = label(i);
-    if (ids[i] === 'leaf-front') l = 'Couverture du livre';
-    if (ids[i] === 'leaf-end') l = 'Quatrième de couverture';
-    back.innerHTML =
-      '<span class="vs-seal" aria-hidden="true">HL</span>' +
-      '<span class="vs-label">' + l + '</span>' +
-      (i > 0 && i < ids.length - 1 ? '<span class="vs-folio">page ' + i + '</span>' : '');
+    leafR.innerHTML = tpl.innerHTML;
+    leafL.innerHTML =
+      '<div class="ll-inner">' +
+        '<span class="ll-num">' + cfg.num + '</span>' +
+        '<span class="ll-label">' + cfg.title + '</span>' +
+        '<span class="vs-ornament" aria-hidden="true"></span>' +
+        '<span class="ll-seal" aria-hidden="true">HL</span>' +
+        '<span class="ll-folio">' + cfg.chap + ' · ' + cfg.folio + '</span>' +
+      '</div>';
+
+    openbook.setAttribute('aria-label', 'Livre ouvert — ' + cfg.chap + ' : ' + cfg.title);
+
+    books.forEach(function(b){
+      var on = b === btn;
+      b.classList.toggle('lit', on);
+      b.setAttribute('aria-pressed', on ? 'true' : 'false');
+    });
+
+    statusEl.textContent = 'Livre ouvert : ' + cfg.title;
+
+    viewer.hidden = false;
+    openbook.classList.remove('open', 'closing');
+    void viewer.offsetWidth;
+    viewer.classList.add('active');
+    openbook.classList.add('open');
+    openbook.focus({preventScroll:true});
+  }
+
+  function closeViewer(){
+    if (!openRub) return;
+    openRub = null;
+    books.forEach(function(b){
+      b.classList.remove('lit');
+      b.setAttribute('aria-pressed', 'false');
+    });
+    statusEl.textContent = 'Livre refermé';
+    openbook.classList.remove('open');
+    openbook.classList.add('closing');
+    viewer.classList.remove('active');
+    window.setTimeout(function(){
+      viewer.hidden = true;
+      openbook.classList.remove('closing');
+      if (lastBook) lastBook.focus();
+    }, reduce ? 0 : 560);
+  }
+
+  books.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      openViewer(btn.getAttribute('data-rub'), btn);
+    });
   });
 
-  // --- Points ---
-  function buildDots(){
-    dotsEl.innerHTML = '';
-    leaves.forEach(function(l, i){
-      var b = document.createElement('button');
-      b.type = 'button';
-      b.className = 'dot';
-      b.setAttribute('aria-label', 'Aller à : ' + label(i));
-      b.setAttribute('data-i', i);
-      b.addEventListener('click', function(){ goTo(i); });
-      dotsEl.appendChild(b);
-    });
-  }
+  backdrop.addEventListener('click', closeViewer);
+  closeBtn.addEventListener('click', closeViewer);
 
-  function refreshChrome(){
-    progressEl.textContent = idx === 0 ? 'Couverture'
-      : idx === ids.length - 1 ? 'Fin de lecture'
-      : 'Page ' + idx + ' — ' + label(idx);
-    Array.prototype.forEach.call(dotsEl.children, function(b, i){
-      b.setAttribute('aria-current', i === idx ? 'page' : 'false');
-    });
-    ribbons.forEach(function(r){
-      if (r.getAttribute('data-to') === currentId()) r.setAttribute('aria-current','page');
-      else r.removeAttribute('aria-current');
-    });
-    btnPrev.disabled = idx === 0;
-    btnNext.disabled = idx === ids.length - 1;
-    stack.setAttribute('aria-label', 'Livre du CV — feuillet courant : ' + label(idx));
-    var n = Math.min(idx, 8);
-    pile.style.width = (4 + n * 1.6) + 'px';
-  }
+  openbook.addEventListener('click', function(ev){ ev.stopPropagation(); });
+  leafR.addEventListener('click', function(ev){ ev.stopPropagation(); });
 
-  function currentHeight(){
-    var leaf = pageEl(idx);
-    var front = leaf.querySelector('.lf-front') || leaf;
-    var h = front.getBoundingClientRect().height;
-    var isCover = leaf.classList.contains('leaf-cover') || leaf.classList.contains('leaf-end');
-    return Math.max(isCover ? 560 : 400, h);
-  }
-  function setHeight(){
-    stack.style.height = currentHeight() + 'px';
-  }
-
-  // --- Feuilletage ---
-  function goTo(target){
-    target = typeof target === 'number' ? target : ids.indexOf(target);
-    if (target === idx || target < 0 || turning) return;
-    var from = idx, fwd = target > from;
-    var out = pageEl(from), inn = pageEl(target);
-    var animator = fwd ? out : inn;
-
-    turning = true;
-    idx = target;
-    refreshChrome();
-
-    inn.classList.add('active');
-    inn.style.display = 'block';
-    out.style.display = 'block';
-    out.classList.add('turning');
-    inn.classList.add('turning');
-
-    if (fwd){
-      out.classList.add('turning-fwd');
-      out.style.transform = '';
-      inn.style.transform = '';
-    } else {
-      // le feuillet revient depuis la gauche (verso d'abord)
-      inn.style.transform = 'rotateY(162deg)';
-      void inn.offsetWidth;
-      inn.style.transform = '';
-    }
-    void out.offsetWidth;
-
-    if (!reduce){
-      // hauteur
-      stack.style.transition = 'height .6s cubic-bezier(.4,0,.2,1)';
-      setHeight();
-    }
-
-    function finish(){
-      out.classList.remove('active','turning','turning-fwd');
-      inn.classList.remove('turning','turning-fwd');
-      out.style.display = '';
-      inn.style.transform = '';
-      out.style.transform = '';
-      stack.style.transition = '';
-      turning = false;
-      // après remise en flux, recalcule la hauteur sur le feuillet courant
-      stack.style.height = '';
-      setHeight();
-      focusHeading(inn);
-    }
-    if (reduce){ finish(); return; }
-
-    var timer = setTimeout(finish, 780);
-    animator.addEventListener('transitionend', function h(ev){
-      if (ev.propertyName !== 'transform') return;
-      clearTimeout(timer);
-      finish();
-      animator.removeEventListener('transitionend', h);
-    });
-  }
-
-  function focusHeading(page){
-    var h = page.querySelector('h1, h2');
-    if (h){
-      h.setAttribute('tabindex','-1');
-      h.focus({preventScroll:true});
-    }
-  }
-
-  function next(){ if (idx < ids.length - 1) goTo(idx + 1); }
-  function prev(){ if (idx > 0) goTo(idx - 1); }
-
-  btnNext.addEventListener('click', next);
-  btnPrev.addEventListener('click', prev);
-  btnOpen.addEventListener('click', function(){ goTo(ids[1]); });
-  btnBack.addEventListener('click', function(){ goTo(ids[0]); });
-
-  ribbons.forEach(function(r){ r.addEventListener('click', function(){ goTo(r.getAttribute('data-to')); }); });
-  sommaireLinks.forEach(function(l){ l.addEventListener('click', function(){ goTo(l.getAttribute('data-to')); }); });
-
-  // --- Clavier ---
   document.addEventListener('keydown', function(ev){
-    var k = ev.key;
-    var t = ev.target;
-    var inInput = /INPUT|TEXTAREA|SELECT/.test(t && t.tagName);
-    if (inInput) return;
-    if (k === ' ' && t && (t.closest('button') || t.closest('a'))) return;
-    if (k === 'ArrowRight' || k === 'PageDown' || k === ' '){ ev.preventDefault(); next(); }
-    else if (k === 'ArrowLeft' || k === 'PageUp'){ ev.preventDefault(); prev(); }
-    else if (k === 'Home'){ ev.preventDefault(); goTo(ids[0]); }
-    else if (k === 'End'){ ev.preventDefault(); goTo(ids[ids.length - 1]); }
+    if (ev.key === 'Escape' && !viewer.hidden) closeViewer();
   });
 
-  // --- Balayage ---
-  var touchX = null;
-  var body = document.getElementById('book-body');
-  body.addEventListener('touchstart', function(ev){
-    touchX = ev.touches[0].clientX;
-  }, {passive:true});
-  body.addEventListener('touchmove', function(ev){
-    if (touchX === null) return;
-    var dx = ev.touches[0].clientX - touchX;
-    var dy = Math.abs(ev.touches[0].clientY - ev.changedTouches[0].clientY);
-    if (Math.abs(dx) > 26 && Math.abs(dx) > dy && !turning){
-      ev.preventDefault();
-      if (dx < 0) next(); else prev();
-      touchX = null;
-    }
-  }, {passive:false});
-  body.addEventListener('touchend', function(){ touchX = null; });
+  // --- Impression : remplit une zone statique ---
+  var printArea = document.getElementById('printArea');
+  function fillPrintArea(){
+    printArea.innerHTML = '';
+    Object.keys(RUBS).forEach(function(id){
+      var cfg = RUBS[id];
+      var tpl = document.getElementById('rub-' + id);
+      var sec = document.createElement('section');
+      sec.className = 'print-rub';
+      sec.innerHTML =
+        '<div class="leaf-head"><span>' + cfg.chap + ' · ' + cfg.folio + '</span></div>' +
+        tpl.innerHTML;
+      printArea.appendChild(sec);
+    });
+  }
+  window.addEventListener('beforeprint', fillPrintArea);
+  window.addEventListener('afterprint', function(){ printArea.innerHTML = ''; });
 
-  // --- Redimensionnement ---
-  window.addEventListener('resize', function(){ setHeight(); });
-
-  buildDots();
-  refreshChrome();
 })();
 </script>
+
+<!-- ===================== CONTENUS DES RUBRIQUES ===================== -->
+
+<template id="rub-profil">
+  <div class="page-head">
+    <div class="head-top"><span class="rub-num">Chapitre I</span><span class="folio">p. 1</span></div>
+    <h2>Profil</h2>
+    <div class="head-rule" aria-hidden="true"></div>
+  </div>
+  <p class="lead">Ancien militaire et coach sportif de 26 ans, je me reconvertis actuellement dans le domaine <strong>informatique</strong>, afin d'intégrer, par la suite, un cursus dans la <strong>cybersécurité</strong>. Je suis actuellement en <strong>BTS SIO SISR</strong> au CFAI de Saint-Étienne, et en alternance dans une entreprise.</p>
+</template>
+
+<template id="rub-experience">
+  <div class="page-head">
+    <div class="head-top"><span class="rub-num">Chapitre II</span><span class="folio">p. 2</span></div>
+    <h2>Expériences professionnelles</h2>
+    <div class="head-rule" aria-hidden="true"></div>
+  </div>
+
+  <div class="sub-block">
+    <div class="block-head"><span class="block-date">2025 — 2026</span><span class="block-title">Stage en milieu hospitalier</span></div>
+    <p class="block-sub">CHU Saint-Étienne, 42</p>
+    <ul class="block-list">
+      <li>Recherches sur la maigreur constitutionnelle</li>
+      <li>Encadrement des patientes sur leur protocole d'activité physique sur 2 mois</li>
+    </ul>
+  </div>
+
+  <div class="sub-block">
+    <div class="block-head"><span class="block-date">2025</span><span class="block-title">Coach sportif</span></div>
+    <p class="block-sub">Espace Cardio, Saint-Étienne, 42</p>
+    <ul class="block-list"><li>Cours collectif type bodysculpt, aquabike</li></ul>
+  </div>
+
+  <div class="sub-block">
+    <div class="block-head"><span class="block-date">2022 — 2025</span><span class="block-title">Stage au sein de clubs de natation</span></div>
+    <p class="block-sub">SEAM et ASPTT, Saint-Étienne, 42</p>
+    <ul class="block-list">
+      <li>Intervention en aisance aquatique</li>
+      <li>Entraînement supervisé du groupe ado loisir</li>
+      <li>Interventions pédagogiques sur la préparation physique de l'équipe 1 / sport-étude</li>
+      <li>Entraînements en autonomie de préparation physique de l'équipe 1 / sport-étude</li>
+    </ul>
+  </div>
+
+  <div class="sub-block">
+    <div class="block-head"><span class="block-date">Été 2024 — 2025</span><span class="block-title">Secouriste aquatique</span></div>
+    <p class="block-sub">Piscine municipale, Saint-Étienne, 42</p>
+    <ul class="block-list"><li>Poste de BNSSA</li></ul>
+  </div>
+
+  <div class="sub-block">
+    <div class="block-head"><span class="block-date">Été 2025</span><span class="block-title">Chauffeur-livreur</span></div>
+    <p class="block-sub">Rouzès, Saint-Étienne, 42</p>
+    <ul class="block-list">
+      <li>Transport de matériel de BTP</li>
+      <li>Opération de manutention</li>
+    </ul>
+  </div>
+
+  <div class="sub-block">
+    <div class="block-head"><span class="block-date">2021 — 2022 &amp; été 2023</span><span class="block-title">Manutentionnaire</span></div>
+    <p class="block-sub">Easydis, 42</p>
+    <ul class="block-list">
+      <li>Préparateur de commande</li>
+      <li>Rouleur sur transpalette à conducteur auto-porté</li>
+    </ul>
+  </div>
+
+  <div class="sub-block">
+    <div class="block-head"><span class="block-date">2018 — 2021</span><span class="block-title">Soldat</span></div>
+    <p class="block-sub">21e Régiment d'Infanterie de Marine, Fréjus, 83</p>
+    <ul class="block-list">
+      <li>Formation de soldat — combattant infanterie</li>
+      <li>Formation en système de transmission et système de communication</li>
+      <li>Formation de chef d'équipe</li>
+      <li>2 déploiements</li>
+    </ul>
+  </div>
+</template>
+
+<template id="rub-competences">
+  <div class="page-head">
+    <div class="head-top"><span class="rub-num">Chapitre III</span><span class="folio">p. 3</span></div>
+    <h2>Compétences techniques</h2>
+    <div class="head-rule" aria-hidden="true"></div>
+  </div>
+  <p class="lead">Réseaux, systèmes, programmation et sécurité : les bases que je consolide chaque jour.</p>
+  <div class="chips">
+    <span class="chip">Gestion de réseaux <strong>Windows / Linux (Ubuntu)</strong> en machine virtuelle</span>
+    <span class="chip">Bases des réseaux — modèle <strong>OSI</strong>, <strong>TCP/IP</strong></span>
+    <span class="chip">Commandes de base <strong>Bash</strong></span>
+    <span class="chip">Programmation — <strong>Python</strong>, <strong>C++</strong>, <strong>C#</strong></span>
+    <span class="chip">Cybersécurité — <strong>Hack The Box</strong>, <strong>TryHackMe</strong></span>
+  </div>
+</template>
+
+<template id="rub-formation">
+  <div class="page-head">
+    <div class="head-top"><span class="rub-num">Chapitre IV</span><span class="folio">p. 4</span></div>
+    <h2>Formations &amp; diplômes</h2>
+    <div class="head-rule" aria-hidden="true"></div>
+  </div>
+
+  <div class="sub-block">
+    <div class="block-head"><span class="block-date">2022 — 2025</span><span class="block-title">Licence STAPS ES — supplément AFF, option haltérophilie</span></div>
+    <p class="block-sub">Université Jean Monnet, Saint-Étienne</p>
+    <ul class="block-list"><li>3ᵉ année de Licence STAPS APAS en cours</li></ul>
+  </div>
+
+  <div class="sub-block">
+    <div class="block-head"><span class="block-date">2024</span><span class="block-title">BNSSA</span></div>
+    <p class="block-sub">Union Départementale des Sapeurs-Pompiers de la Loire (UDSPL)</p>
+    <ul class="block-list"><li>Brevet national de sécurité et de sauvetage aquatique</li></ul>
+  </div>
+
+  <div class="sub-block">
+    <div class="block-head"><span class="block-date">2024</span><span class="block-title">PSE1</span></div>
+    <p class="block-sub">Union Départementale des Sapeurs-Pompiers de la Loire (UDSPL)</p>
+    <ul class="block-list"><li>Premiers secours en équipe de niveau 1</li></ul>
+  </div>
+
+  <div class="sub-block">
+    <div class="block-head"><span class="block-date">2018</span><span class="block-title">Baccalauréat S</span></div>
+    <p class="block-sub">Lycée Simone Weil, Saint-Priest-en-Jarez</p>
+    <ul class="block-list"><li>Obtention du baccalauréat scientifique, spécialité SVT</li></ul>
+  </div>
+</template>
+
+<template id="rub-langues">
+  <div class="page-head">
+    <div class="head-top"><span class="rub-num">Chapitre V</span><span class="folio">p. 5</span></div>
+    <h2>Langues</h2>
+    <div class="head-rule" aria-hidden="true"></div>
+  </div>
+  <ul class="kv">
+    <li><span class="k">Français</span><span class="v">Langue maternelle</span></li>
+    <li><span class="k">Anglais</span><span class="v">B2 – C1</span></li>
+  </ul>
+</template>
+
+<template id="rub-permis">
+  <div class="page-head">
+    <div class="head-top"><span class="rub-num">Chapitre VI</span><span class="folio">p. 6</span></div>
+    <h2>Permis &amp; CACES</h2>
+    <div class="head-rule" aria-hidden="true"></div>
+  </div>
+  <ul class="kv">
+    <li><span class="k">Permis B</span><span class="v">Véhiculé</span></li>
+    <li><span class="k">Permis A1</span><span class="v">Moto légère</span></li>
+    <li><span class="k">CACES 1A</span><span class="v">Engins de chantier</span></li>
+  </ul>
+</template>
+
+<template id="rub-contact">
+  <div class="page-head">
+    <div class="head-top"><span class="rub-num">Chapitre VII</span><span class="folio">p. 7</span></div>
+    <h2>Contact</h2>
+    <div class="head-rule" aria-hidden="true"></div>
+  </div>
+  <p class="lead">Je suis à la recherche d'une <strong>alternance</strong> pour développer mes compétences. N'hésitez pas à me contacter.</p>
+  <ul class="contact-list">
+    <li>
+      <span class="ico" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span>
+      <span>06 ** ** ** **</span>
+    </li>
+    <li>
+      <span class="ico" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg></span>
+      <a href="mailto:mail@gmail.com">mail@gmail.com</a>
+    </li>
+    <li>
+      <span class="ico" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-4 1.5-4-2.5-6-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg></span>
+      <span><a href="https://github.com/HugoLargeron" target="_blank" rel="noopener noreferrer">HugoLargeron <span class="note">github.com · nouvelle fenêtre</span></a></span>
+    </li>
+    <li>
+      <span class="ico" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
+      <span>Saint-Étienne, France</span>
+    </li>
+  </ul>
+</template>
+
 </body>
 </html>
