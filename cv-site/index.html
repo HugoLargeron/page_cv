@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Hugo Largeron — CV à la bibliothèque</title>
 <meta name="description" content="CV de Hugo Largeron, BTS SIO SISR, présenté comme une bibliothèque ancienne : chaque rubrique est un livre à ouvrir.">
+<meta name="theme-color" content="#2c1a0a">
 <style>
 :root{
   --serif:Georgia,'Times New Roman',Times,serif;
@@ -205,6 +206,11 @@ a{color:inherit;}
     0 0 22px rgba(236,206,108,.35);
 }
 .book:active{transform:translateY(-2px);}
+.book::after{
+  content:"";position:absolute;inset:-5px;border-radius:5px;pointer-events:none;z-index:-1;
+  box-shadow:0 0 30px 4px rgba(236,206,108,.4);
+  opacity:0;
+}
 .book.lit{
   transform:translateY(-8px);
   box-shadow:
@@ -212,11 +218,11 @@ a{color:inherit;}
     inset 3px 0 6px rgba(255,230,170,.16),
     0 24px 34px -10px rgba(0,0,0,.72),
     0 0 30px rgba(236,206,108,.55);
-  animation:bookGlow 3.2s ease-in-out infinite;
 }
+.book.lit::after{opacity:1;animation:bookGlow 3.2s ease-in-out infinite;}
 @keyframes bookGlow{
-  0%,100%{filter:brightness(1);}
-  50%{filter:brightness(1.16);}
+  0%,100%{opacity:.45;}
+  50%{opacity:1;}
 }
 .bookend{
   align-self:stretch;width:26px;margin:0 -40px 0 0;
@@ -507,7 +513,9 @@ html.no-js .viewer{display:none;}
     </div>
   </header>
 
-  <section class="library" id="shelf">
+  <section class="library" id="shelf" aria-labelledby="shelf-title">
+
+    <h2 class="sr-only" id="shelf-title">Rubriques du CV</h2>
 
     <div class="shelf-zone">
       <nav class="books-row" aria-label="Rubriques du curriculum vitae">
@@ -551,7 +559,7 @@ html.no-js .viewer{display:none;}
   <!-- Visionneuse : livre ouvert -->
   <div class="viewer" id="viewer" hidden>
     <div class="backdrop" id="backdrop" aria-hidden="true"></div>
-    <div class="openbook" id="openbook" role="dialog" aria-modal="true" tabindex="-1">
+    <div class="openbook" id="openbook" role="dialog" aria-label="Livre ouvert" aria-modal="true" tabindex="-1">
       <div class="book-base">
         <div class="boards" aria-hidden="true"></div>
         <div class="leaf-l" id="leafL" aria-hidden="true"></div>
