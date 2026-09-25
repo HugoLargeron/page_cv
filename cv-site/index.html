@@ -24,8 +24,7 @@ html{scroll-behavior:smooth;}
 body{
   margin:0;color:var(--gold-3);
   font-family:var(--sans);line-height:1.6;
-  background:
-    radial-gradient(110% 90% at 50% 0%, #5a3c1f 0%, #2c1a0a 55%, #150b04 100%);
+  background:#150b04;
   min-height:100vh;
 }
 a{color:inherit;}
@@ -56,6 +55,7 @@ a{color:inherit;}
 }
 .wall{
   position:absolute;inset:0;z-index:0;pointer-events:none;
+  contain:paint;
   background:
     radial-gradient(60% 40% at 50% 10%, rgba(255,205,115,.13), transparent 70%),
     repeating-linear-gradient(90deg, rgba(0,0,0,.18) 0 2px, transparent 2px 6px),
@@ -68,6 +68,7 @@ a{color:inherit;}
 .arch{
   position:absolute;top:0;left:50%;transform:translateX(-50%);
   width:74vw;max-width:800px;height:130px;
+  contain:paint;
   background:radial-gradient(60% 100% at 50% 0%, rgba(80,52,26,.6), transparent 72%);
   border-radius:130px 130px 0 0;
 }
@@ -88,6 +89,7 @@ a{color:inherit;}
 .pillar-r{right:0;}
 .sconce{
   position:absolute;top:70px;width:180px;height:180px;border-radius:50%;z-index:0;pointer-events:none;
+  contain:paint;
   background:radial-gradient(circle, rgba(255,214,130,.5), rgba(255,214,130,.14) 46%, transparent 72%);
 }
 .sconce-l{left:6vw;}
@@ -154,6 +156,7 @@ a{color:inherit;}
 .books-row{
   display:flex;align-items:flex-end;justify-content:center;
   gap:16px;padding:0 46px;margin-bottom:-7px;position:relative;z-index:2;
+  contain:layout style;
 }
 .book{
   appearance:none;border:0;cursor:pointer;position:relative;
